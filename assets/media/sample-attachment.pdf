@@ -1,0 +1,42 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 5 0 R /F2 6 0 R >> >> /Contents 4 0 R >>
+endobj
+4 0 obj
+<< /Length 351 >>
+stream
+BT
+/F1 24 Tf 1 0 0 1 60 760 Tm (Binary attachments in a Jekyll blog) Tj
+/F2 12 Tf 1 0 0 1 60 684 Tm (Any file placed under assets/media/ is copied verbatim) Tj
+/F2 12 Tf 1 0 0 1 60 626 Tm (into the built site and can be linked from Markdown.) Tj
+/F2 10 Tf 1 0 0 1 60 584 Tm (Replace this file with your own PDF, dataset, slide deck, or archive.) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+6 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000121 00000 n 
+0000000257 00000 n 
+0000000659 00000 n 
+0000000734 00000 n 
+trailer
+<< /Size 7 /Root 1 0 R >>
+startxref
+804
+%%EOF

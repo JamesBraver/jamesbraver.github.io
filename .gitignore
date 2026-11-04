@@ -1,0 +1,23 @@
+# Jekyll build output and caches
+_site/
+.jekyll-cache/
+.jekyll-metadata
+.sass-cache/
+
+# Bundler
+.bundle/
+vendor/bundle/
+
+# Gem lock
+Gemfile.lock
+
+# Editor
+.idea/
+*.iml
+
+# OS noise
+.DS_Store
+Thumbs.db
+
+# Local preview logs
+.preview.log

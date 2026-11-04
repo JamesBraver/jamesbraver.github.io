@@ -1,0 +1,17 @@
+---
+layout: default
+---
+<article class="page">
+  {%- unless page.hide_title %}
+  <header class="page-header">
+    <h1>{{ page.title | escape }}</h1>
+    {%- if page.subtitle %}
+    <p class="lead">{{ page.subtitle }}</p>
+    {%- endif %}
+  </header>
+  {%- endunless %}
+
+  <div class="post-content">
+    {{ content }}
+  </div>
+</article>

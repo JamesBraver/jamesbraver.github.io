@@ -1,0 +1,76 @@
+# ---------------------------------------------------------------------------
+# Site settings
+# ---------------------------------------------------------------------------
+
+title: "My Blog"
+tagline: "Notes on code, tools, and whatever I break next."
+description: >-
+  A simple, fast blog built with Jekyll and hosted on GitHub Pages.
+  Markdown posts, plain CSS, no tracking, no build ceremony.
+
+author:
+  name: a114
+
+github_username: jamesbraver
+
+# Change these two lines when you rename the repository or move to a custom
+# domain:
+#   * user site (repo named <username>.github.io):  url: https://<username>.github.io   baseurl: ""
+#   * project site (any other repo name):           baseurl: "/<repo-name>"
+url: "https://jamesbraver.github.io"
+baseurl: ""
+lang: en
+timezone: Asia/Shanghai
+
+# ---------------------------------------------------------------------------
+# Build settings
+# ---------------------------------------------------------------------------
+
+# No gem theme: the layouts in _layouts/ are the whole design.
+markdown: kramdown
+highlighter: rouge
+
+kramdown:
+  input: GFM            # GitHub Flavored Markdown: tables, strikethrough, autolinks
+  syntax_highlighter: rouge
+  hard_wrap: false
+  auto_ids: true
+  footnote_nr: 1
+  entity_output: as_char
+  smart_quotes: lsquo,rsquo,ldquo,rdquo
+
+# Every plugin below is on the GitHub Pages whitelist, so the site builds both
+# with Actions and with the legacy "deploy from branch" builder.
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+feed:
+  path: feed.xml
+
+# Posts live in _posts/ named YYYY-MM-DD-title.md
+permalink: /:year/:month/:day/:title/
+
+# Files Jekyll should not copy into the built site.
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - LICENSE
+  - "*.sh"
+  - .idea
+  - .github
+
+defaults:
+  # Every .md file that is not a post or a layout is a standalone page.
+  - scope:
+      path: ""
+    values:
+      layout: page
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+      comments: false

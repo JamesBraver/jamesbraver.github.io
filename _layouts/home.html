@@ -1,0 +1,35 @@
+---
+layout: default
+---
+{%- assign posts = paginator.posts | default: site.posts -%}
+
+<section class="intro">
+  <h1>{{ page.title | default: site.title }}</h1>
+  {%- if page.subtitle %}
+  <p class="lead">{{ page.subtitle }}</p>
+  {%- endif %}
+</section>
+
+{{ content }}
+
+<ul class="post-list">
+  {%- for post in posts %}
+  <li class="post-item">
+    <div class="post-meta">
+      <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
+      {%- if post.tags.size > 0 %}
+      <span class="post-meta-sep" aria-hidden="true">·</span>
+      <span class="post-meta-tags">{{ post.tags | join: " / " }}</span>
+      {%- endif %}
+    </div>
+    <h2 class="post-item-title">
+      <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+    </h2>
+    <p class="post-item-excerpt">{{ post.excerpt | strip_html | normalize_whitespace | truncatewords: 38 }}</p>
+  </li>
+  {%- endfor %}
+</ul>
+
+{%- if posts.size == 0 %}
+<p class="empty">No posts yet. Add a Markdown file to <code>_posts/</code> to get started.</p>
+{%- endif %}
