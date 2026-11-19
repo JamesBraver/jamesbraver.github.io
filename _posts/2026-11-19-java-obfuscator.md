@@ -32,7 +32,8 @@ description: >-
 
 根据笔者的经历，你如果出口IP在台湾的情况下Google "Java Obfuscator"，你可能会遇到`7 Best Java Obfuscators: Compared and Reviewed`[^1]，如果你打开devtools然后查看head元素你会发现`Search Engine Optimization by Rank Math`。
 
-以下内容出自
+以下内容出自DashO官网
+
 > DashO combines name obfuscation via overload induction, multi-layer control-flow transformation, per-class string encryption, and runtime application self-protection (RASP) with watermarking for forensic leak tracking.
 
 如果你看不懂洋文，请看我的翻译。如果你每个字都认识但是就是不认识这个字词排列那么恭喜你，笔者在翻译完成严肃品鉴的时候也是感觉大脑掉线了。
@@ -76,26 +77,30 @@ description: >-
 # AIDE
 
 目前native混淆我知道的比较强（我朋友拿AI逆不开）的混淆器。
-Java层的常量加密很狗屎但是有恶俗在检测到调试器不崩而是影响揭密要用的常量，然后由于使用了XTEA算法所以如果你没模拟好它的解密链你会解出乱码。
+
+Java层的常量加密很狗屎但是有恶俗的东西，在检测到调试器后不崩而是影响解密要用的常量，然后由于使用了XTEA算法所以如果你没模拟好它的解密链你会解出乱码。
+
 会硬编码被混淆的类名（明文保存）。
+
 公开的1.2.1版本有验证，验证服务器死了而且硬编码了一个过期的HTTPS证书所以你不破解就用不了。
 
 # Allatori
 
 没什么评价，demo版会给所有`public static void main(String[] args)`塞stdout说你在用demo版allatori，内置了从proguard demo里面复制粘贴的windows非法文件名大全混淆字典（我曾试图开PR为proguard更新这个列表但是每人理我所以我被迫自己close了），不推荐使用因为逆向成本很低。
+
 BTW它们的字节码库是Apache BCEL。
 
 # [Aidsfuscator](https://github.com/LvStrnggg/aidsfuscator)
 
 本人最推荐使用的混淆器，主要由[lvstrng](https://github.com/LvStrnggg)维护，原生支持minecraft fabric mod混淆，你可以把它当作Minecraft cheater的Zelix KlassMaster的非官方免费版，大部分功能借鉴了Zelix的同时包含了一些Zelix没有的功能[^4]，主dev还为Zelix KlassMaster提出过enhancement suggestion并且被采纳[^5]。
 
-如果你想自己写混淆器我推荐拿这个当base再改。
+如果你想自己写混淆器我推荐拿这个当base再改（v2 branch没有license，默认all rights reserved，请改main branch的MIT协议代码）。
 
 # 自写
 
 同上，推荐使用Aidsfuscator作为base。以下是个人认为可以增加逆向成本的方法：
 
-1. 复杂的解密逻辑 解密器变体(polymorphic decryptors) > 强迫解混淆的人使用JVM内的JVM模拟你的解密逻辑
+1. 复杂的解密逻辑+解密器变体(polymorphic decryptors) > 强迫解混淆的人使用JVM内的JVM模拟你的解密逻辑
 
 2. 随机插入(insert randomly) > 如果你的解密过程需要调用一些方法或者访问一些字段，请您务必在注入这些字段时不要把它们注入在最后面，因为这样会给逆向分析者很大的帮助（例：Zelix的混淆helperclass可以通过扫描&lt;clinit&gt;方法后仍有多个方法存在的特征被筛出）。
 
@@ -108,6 +113,7 @@ BTW它们的字节码库是Apache BCEL。
 如果一个Java多功能混淆器没有名称混淆那么它最好是待在坟地里比较好，如果没有string加密那么你最好别用，没有flow混淆你可以不用，没有反调试代码注入你可以自己注入，没有水印你可以使用白菜价的deepseek配上hermes agent写一个，如果吹自己很牛的同时演示视频关评论你就别用。
 
 如果你使用了native混淆，那么你一个为了跨平台兼容写java的为什么会想把java字节码转成native代码再跟你的软件一起打包发送？
+
 哦如果你真的需要保护极端敏感的业务代码的话请忽略。
 
 ---
