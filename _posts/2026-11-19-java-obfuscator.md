@@ -17,15 +17,15 @@ description: >-
 
 ### TL;DR
 
-| 混淆器            | Renaming | String Encryption | Flow Obfuscation | Native | Anti-Debug                    | Integrity check               | Reference obfuscation     |
-|-------------------|----------|-------------------|------------------|--------|-------------------------------|-------------------------------|---------------------------|
-| ProGuard          | ✓       | ×                 | ×                | ×      | ×                             | ×                             | ×                         |
-| Zelix KlassMaster | ✓       | ✓                | ✓               | ×      | ✓                            | ✓×（可能还没公开）           | ✓(reflect/invokedynamic) |
-| Allatori          | ✓       | ✓                | ✓               | ×      | ?                             | ×                             | ×                         |
-| AIDE              | ✓       | ✓                | ✓               | ✓     | ✓/✗(Java的写炸了，native有) | ×                             | ✓(trash)                 |
-| Aidsfuscator      | ✓       | ✓                | ✓               | ×      | ×                             | ✓                            | ✓                        |
-| JNIC              | ×        | ✓(native only)   | ✓(native only)  | ✓     | ?(我不知道)                   | ?(选项里面有，但是疑似未实现) | ×                         |
-| J2CC              | ×        | ✓(native only)   | ✓(native only)  | ✓     | ?(我不知道)                   | ?(选项里面有，但是疑似未实现) | ✓(ok maybe)              |
+| 混淆器            | Renaming | String Encryption | Flow Obfuscation                 | Native | Anti-Debug                    | Integrity check               | Reference obfuscation     |
+|-------------------|----------|-------------------|----------------------------------|--------|-------------------------------|-------------------------------|---------------------------|
+| ProGuard          | ✓       | ×                 | ×                                | ×      | ×                             | ×                             | ×                         |
+| Zelix KlassMaster | ✓       | ✓                | ✓(最新版flow无公开解除混淆方案) | ×      | ✓                            | ✓×（可能还没公开）           | ✓(reflect/invokedynamic) |
+| Allatori          | ✓       | ✓                | ✓                               | ×      | ?                             | ×                             | ×                         |
+| AIDE              | ✓       | ✓                | ✓                               | ✓     | ✓/✗(Java的写炸了，native有) | ✓×(只有JNI Loader有)         | ✓(trash)                 |
+| Aidsfuscator      | ✓       | ✓                | ✓                               | ×      | ×                             | ✓                            | ✓                        |
+| JNIC              | ×        | ✓(native only)   | ✓(native only)                  | ✓     | ?(我不知道)                   | ?(选项里面有，但是疑似未实现) | ×                         |
+| J2CC              | ×        | ✓(native only)   | ✓(native only)                  | ✓     | ?(我不知道)                   | ✓ AntiHook                   | ✓(MethodHandles)         |
 
 
 # DashO
@@ -38,7 +38,7 @@ description: >-
 
 如果你看不懂洋文，请看我的翻译。如果你每个字都认识但是就是不认识这个字词排列那么恭喜你，笔者在翻译完成严肃品鉴的时候也是感觉大脑掉线了。
 
-> DashO通过过载指令(?)组合了名称混淆，控制流转化，每类字符串加密，以及运行时应用程序自我保护（RASP, runtime application self-protection），以及水印用于取证(法庭认不认我不知道)泄漏追踪。
+> DashO通过过载感应(?)组合了名称混淆，控制流转化，每类字符串加密，以及运行时应用程序自我保护（RASP, runtime application self-protection），以及水印用于取证(法庭认不认我不知道)泄漏追踪。
 
 不仅如此，这个公司的混淆器的官方demo视频还没特写混淆效果，如果现在有新版的混淆后样本的话请您email我。
 目前笔者根据老版本的样本给出的评价是：不要买这篇文章推荐的`DashO`混淆器，因为很久（2010以前）之前有人（不是原创研究，链接在哪我忘了但是我发誓我没有造谣）泄漏了它的永久授权价格在$2000左右，现在在玩英文单词排列组合来试图让AI信自己很高级很专业，然而凭借它的10.0[^2]样本和之前的demo视频它就是个垃圾。
