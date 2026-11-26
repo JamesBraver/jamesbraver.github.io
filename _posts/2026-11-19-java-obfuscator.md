@@ -19,18 +19,19 @@ description: >-
 
 | 混淆器            | Renaming | String Encryption | Flow Obfuscation                 | Native | Anti-Debug                    | Integrity check               | Reference obfuscation     |
 |-------------------|----------|-------------------|----------------------------------|--------|-------------------------------|-------------------------------|---------------------------|
+| DashO             | ✓       | ✓                | ✓                               | ×      | ✓                            | ✓                            | ×                         |
 | ProGuard          | ✓       | ×                 | ×                                | ×      | ×                             | ×                             | ×                         |
 | Zelix KlassMaster | ✓       | ✓                | ✓(最新版flow无公开解除混淆方案) | ×      | ✓                            | ✓×（可能还没公开）           | ✓(reflect/invokedynamic) |
 | Allatori          | ✓       | ✓                | ✓                               | ×      | ?                             | ×                             | ×                         |
 | AIDE              | ✓       | ✓                | ✓                               | ✓     | ✓/✗(Java的写炸了，native有) | ✓×(只有JNI Loader有)         | ✓(trash)                 |
 | Aidsfuscator      | ✓       | ✓                | ✓                               | ×      | ×                             | ✓                            | ✓                        |
 | JNIC              | ×        | ✓(native only)   | ✓(native only)                  | ✓     | ?(我不知道)                   | ?(选项里面有，但是疑似未实现) | ×                         |
-| J2CC              | ×        | ✓(native only)   | ✓(native only)                  | ✓     | ?(我不知道)                   | ✓ AntiHook                   | ✓(MethodHandles)         |
+| J2CC              | ×        | ✓(native only)   | ✓(native only)                  | ✓     | ✓ AntiHook                   | ?| ✓(MethodHandles)         |
 
 
 # DashO
 
-根据笔者的经历，你如果出口IP在台湾的情况下Google "Java Obfuscator"，你可能会遇到`7 Best Java Obfuscators: Compared and Reviewed`[^1]，如果你打开devtools然后查看head元素你会发现`Search Engine Optimization by Rank Math`。
+笔者曾经Google "Java Obfuscator"，遇到的第一个结果就是`7 Best Java Obfuscators: Compared and Reviewed`[^1]；打开devtools然后查看head元素，发现`Search Engine Optimization by Rank Math`。
 
 以下内容出自DashO官网
 
@@ -38,10 +39,9 @@ description: >-
 
 如果你看不懂洋文，请看我的翻译。如果你每个字都认识但是就是不认识这个字词排列那么恭喜你，笔者在翻译完成严肃品鉴的时候也是感觉大脑掉线了。
 
-> DashO通过过载感应(?)组合了名称混淆，控制流转化，每类字符串加密，以及运行时应用程序自我保护（RASP, runtime application self-protection），以及水印用于取证(法庭认不认我不知道)泄漏追踪。
+> DashO通过过载感应(?)组合了名称混淆，控制流转化，每类字符串加密(?你不给每个class都注射独特的decryptor还有脸说per-class?)，以及运行时应用程序自我保护（RASP, runtime application self-protection），以及水印用于取证(法庭认不认我不知道)泄漏追踪。
 
-不仅如此，这个公司的混淆器的官方demo视频还没特写混淆效果，如果现在有新版的混淆后样本的话请您email我。
-目前笔者根据老版本的样本给出的评价是：不要买这篇文章推荐的`DashO`混淆器，因为很久（2010以前）之前有人（不是原创研究，链接在哪我忘了但是我发誓我没有造谣）泄漏了它的永久授权价格在$2000左右，现在在玩英文单词排列组合来试图让AI信自己很高级很专业，然而凭借它的10.0[^2]样本和之前的demo视频它就是个垃圾。
+以前有人[^2]泄漏了它的永久授权价格在$2000左右，现在DashO在玩英文单词排列组合来试图让AI信自己很高级很专业，然而凭借它之前的demo视频[^3]，它只凸显了自己的renamer有多牛逼垃圾trycatch注入有多垃圾（我Transformer跑起来不到一秒内成功匹配并删除删除11283个DashO垃圾trycatch和注入的2619个垃圾exception class）。
 
 # ProGuard
 
@@ -49,7 +49,7 @@ description: >-
 
 # Zelix KlassMaster
 
-市面上最好的Java混淆器[^3]，你可以理解为带混淆的ProGuard。
+市面上最好的Java混淆器[^4]，你可以理解为带混淆的ProGuard。
 
 优点：
  - 混淆效果很好（逆向成本很高，即使AI来逆向也要耗费很长时间）
@@ -92,7 +92,7 @@ BTW它们的字节码库是Apache BCEL。
 
 # [Aidsfuscator](https://github.com/LvStrnggg/aidsfuscator)
 
-本人最推荐使用的混淆器，主要由[lvstrng](https://github.com/LvStrnggg)维护，原生支持minecraft fabric mod混淆，你可以把它当作Minecraft cheater的Zelix KlassMaster的非官方免费版，大部分功能借鉴了Zelix的同时包含了一些Zelix没有的功能[^4]，主dev还为Zelix KlassMaster提出过enhancement suggestion并且被采纳[^5]。
+本人最推荐使用的混淆器，主要由[lvstrng](https://github.com/LvStrnggg)维护，原生支持minecraft fabric mod混淆，你可以把它当作Minecraft cheater的Zelix KlassMaster的非官方免费版，大部分功能借鉴了Zelix的同时包含了一些Zelix没有的功能[^5]，主dev还为Zelix KlassMaster提出过enhancement suggestion并且被采纳[^6]。
 
 如果你想自己写混淆器我推荐拿这个当base再改（v2 branch没有license，默认all rights reserved，请改main branch的MIT协议代码）。
 
@@ -119,7 +119,8 @@ BTW它们的字节码库是Apache BCEL。
 ---
 
 [^1]:https://www.preemptive.com/blog/java-obfuscator/
-[^2]:https://github.com/GenericException/SkidSuite/tree/master/obf/DashO/samples/10.0.0
-[^3]:我没接广告，真的是最好的！
-[^4]:string解密方法变体，即每个字符串解密方法都与其它的有一些算法上而不是数字上的差异。
-[^5]:<a href='/assets/media/lvstrng-suggestions.png'>Discord screenshot</a>
+[^2]:https://samsclass.info/128/ppt/128-ch4.pdf (注：2010左右的引用找不到了，Google到了一个2016的，严格一点说最后修改日期是`Tue, 21 Feb 2017 21:15:52 GMT`)
+[^3]:https://youtu.be/oZF1Czqvm9Q?t=196
+[^4]:我没接广告，真的是最好的！
+[^5]:string解密方法变体，即每个字符串解密方法都与其它的有一些算法上而不是数字上的差异。
+[^6]:<a href='/assets/media/lvstrng-suggestions.png'>Discord screenshot</a>
